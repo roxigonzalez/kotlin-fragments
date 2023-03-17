@@ -1,4 +1,3 @@
-<?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
@@ -6,7 +5,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:padding="@dimen/medium_gap"
-    tools:context=".MainActivity">
+    tools:context=".Game">
 
     <LinearLayout
         android:layout_height="0dp"
@@ -23,15 +22,15 @@
             android:textColor="@color/black"
 
             />
-<!--            style="@style/TextAppearance.MaterialComponents.Caption"-->
+        <!--            style="@style/TextAppearance.MaterialComponents.Caption"-->
         <TextView
             android:layout_marginTop="@dimen/medium_gap"
             android:layout_width="wrap_content"
-           android:layout_height="wrap_content"
-           tools:text="5"
+            android:layout_height="wrap_content"
+            tools:text="5"
             android:id="@+id/display_score_team_a_text_view"
-           style="@style/TextAppearance.MaterialComponents.Headline1"
-           />
+            style="@style/TextAppearance.MaterialComponents.Headline1"
+            />
         <Button
             android:layout_marginTop="@dimen/medium_gap"
             android:id="@+id/add_one_team_a_button"
@@ -91,12 +90,5 @@
             android:text="@string/plus_1"
             />
     </LinearLayout>
-
-    <androidx.fragment.app.FragmentContainerView
-        android:id="@+id/counter_fragment"
-        android:name="com.example.lifecycle.CounterFragment"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content" />
-
 
 </LinearLayout>

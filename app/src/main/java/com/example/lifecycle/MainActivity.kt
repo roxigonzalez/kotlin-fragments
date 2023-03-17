@@ -9,14 +9,16 @@ import android.widget.TextView
 import org.w3c.dom.Text
 
 class MainActivity : AppCompatActivity() {
-
+    // UI elements
     private lateinit var displayTeamA:TextView
     private lateinit var displayTeamB:TextView
     private lateinit var addOneTeamA:Button
     private lateinit var addOneTeamB:Button
+    private lateinit var getResults:Button
 
-    private var scoreTeamA
-    private var scoreTeamB
+    // data element
+    private var scoreTeamA = 0
+    private var scoreTeamB = 0
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -24,11 +26,8 @@ class MainActivity : AppCompatActivity() {
         bind()
         displayTeamA.text = scoreTeamA.toString()
         displayTeamB.text = scoreTeamB.toString()
-
-        with(savedInstanceState) {
-//            displayTeamA.text = (this?.getInt(TEAM_SCORE_A) ?: scoreTeamA)
-        }
-
+        addListener()
+        getResults()
     }
 
     private fun bind() {
@@ -36,55 +35,46 @@ class MainActivity : AppCompatActivity() {
         displayTeamB = findViewById(R.id.display_score_team_b_text_view)
         addOneTeamA = findViewById(R.id.add_one_team_a_button)
         addOneTeamB = findViewById(R.id.add_one_team_b_button)
-
+        getResults = findViewById(R.id.get_results)
     }
 
 
     private fun addListener() {
-// get data and add one
+        addOneTeamA.setOnClickListener{
+            scoreTeamA++
+            displayTeamA.text = scoreTeamA.toString()
+        }
+        addOneTeamB.setOnClickListener{
+            scoreTeamB++
+            displayTeamB.text = scoreTeamB.toString()
+        }
     }
 
-    override fun onSaveInstanceState(outState: Bundle, outPersistentState: PersistableBundle) {
-        super.onSaveInstanceState(outState, outPersistentState)
+    private fun getResults() {
+        getResults.setOnClickListener {
+//            val mBundle = Bundle()
+//            mBundle.putString("team_a", scoreTeamA.toString())
+//            mBundle.putString("team_b", scoreTeamA.toString())
+
+            val fragmentManager = supportFragmentManager
+            val fragment = CounterFragment.newInstance(scoreTeamA.toString(), scoreTeamB.toString())
+            fragmentManager.beginTransaction()
+                .replace(R.id.counter_fragment, fragment)
+                .commit()
+
+        }
+    }
+
+    override fun onSaveInstanceState(outState: Bundle) {
+        super.onSaveInstanceState(outState)
         outState.apply {
-            putString()
+            putInt(TEAM_SCORE_A, scoreTeamA)
+            putInt(TEAM_B_SCORE, scoreTeamB)
         }
     }
 
     companion object {
-        const val  TEAM_SCORE_A =
-    }
-
-//    example
-    override fun onStart() {
-        super.onStart()
-        Log.d(TAG, "OnStart")
-    }
-
-    override fun onResume() {
-        super.onResume()
-        Log.d(TAG, "OnStart")
-    }
-
-    override fun onStop() {
-        super.onStop()
-        Log.d(TAG, "OnStart")
-
-    }
-
-    override fun onPause() {
-        super.onPause()
-        Log.d(TAG, "OnStart")
-
-    }
-
-    override fun onDestroy() {
-        super.onDestroy()
-        Log.d(TAG, "OnStart")
-
-    }
-
-    companion object {
-        const val TAG = "com.example.MainActivity"
+        const val TEAM_SCORE_A = "TEAM_A_SCORE"
+        const val TEAM_B_SCORE = "TEAM_B_SCORE"
     }
 }

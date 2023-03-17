@@ -4,4 +4,6 @@
     <string name="plus_1">+1</string>
     <string name="team_b">Team B</string>
     <string name="team_a_d_team_b_d">Team A: %d Team B: %d</string>
+    <!-- TODO: Remove or change this placeholder text -->
+    <string name="hello_blank_fragment">Hello blank fragment</string>
 </resources>
